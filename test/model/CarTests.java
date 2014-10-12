@@ -33,11 +33,6 @@ public class CarTests {
 	}
 	
 	@Test
-	public void getIdTest () {
-		Assert.assertEquals(car.getId(), 0);
-	}
-	
-	@Test
 	public void getNameTest () {
 		Assert.assertEquals(car.getName(), "Skoda");
 	}

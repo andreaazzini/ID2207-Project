@@ -13,11 +13,11 @@ public class Client {
 	private String email;
 	private String phone;
 	private List<Claim> claims;
-	private List<CarTests> cars;
+	private List<Car> cars;
 	private String IBAN;
 	
 	public Client(String name, String surname, int age, String email,
-			String phone, String IBAN, List<CarTests> cars) {
+			String phone, String IBAN, List<Car> cars) {
 		id = idHandler.get();
 		this.name = name;
 		this.surname = surname;
@@ -52,7 +52,7 @@ public class Client {
 		this.age = age;
 	}
 
-	public List<CarTests> getCars() {
+	public List<Car> getCars() {
 		return cars;
 	}
 
@@ -80,11 +80,11 @@ public class Client {
 		return claims;
 	}
 	
-	public void addCar(CarTests car) {
+	public void addCar(Car car) {
 		this.cars.add(car);
 	}
 	
-	public void removeCar(CarTests car) {
+	public void removeCar(Car car) {
 		this.cars.remove(car);
 	}
 
