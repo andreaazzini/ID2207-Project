@@ -2,16 +2,23 @@ package model;
 
 public class Car {
 	
+	private IdHandler idHandler = new IdHandler();
+	private int id;
 	private Client owner;
 	private String name;
 	private int price;
 	private String insurance;
 	
 	public Car(Client owner, String name, int price, String insurance) {
+		this.id = idHandler.get();
 		this.owner = owner;
 		this.name = name;
 		this.price = price;
 		this.insurance = insurance;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public Client getOwner() {
@@ -37,4 +44,28 @@ public class Car {
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Car other = (Car) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+
 }
