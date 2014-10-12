@@ -31,6 +31,10 @@ public class Client {
 	public Client (String name, String surname, int age, String email, String phone, String IBAN) {
 		this(name, surname, age, email, phone, IBAN, new ArrayList<Car>());
 	}
+	
+	public void addClaim (Claim claim) {
+		claims.add(claim);
+	}
 
 	public String getEmail() {
 		return email;

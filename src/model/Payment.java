@@ -78,4 +78,9 @@ public class Payment {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return this.id + "    " + this.client.getName() + "    " + this.client.getSurname();
+	}
 }

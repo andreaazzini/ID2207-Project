@@ -18,6 +18,7 @@ public class Claim {
 	private boolean decided;
 	
 	public Claim(Client client, String text, int amount) {
+		client.addClaim(this);
 		id = idHandler.get();
 		date = new Date();
 		this.client = client;
@@ -109,4 +110,10 @@ public class Claim {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		String approved = this.decided ? (this.ok ? "Approved" : "Not approved") : "Ongoing";
+		//styling could be improved
+		return this.id + "    " + this.client.getName() +"    " + this.client.getSurname() + "    " + approved; 
+	}
 }
