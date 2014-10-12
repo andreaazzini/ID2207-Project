@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Garage {
-	private List<CarTests> notRepairedCars;
-	private List<CarTests> repairedCars;
+	private List<Car> notRepairedCars;
+	private List<Car> repairedCars;
 
 	public Garage() {
-		notRepairedCars = new ArrayList<CarTests>();
-		repairedCars = new ArrayList<CarTests>();
+		notRepairedCars = new ArrayList<Car>();
+		repairedCars = new ArrayList<Car>();
 	}
 
-	public List<CarTests> getNotRepairedCars() {
+	public List<Car> getNotRepairedCars() {
 		return notRepairedCars;
 	}
 
-	public List<CarTests> getRepairedCars() {
+	public List<Car> getRepairedCars() {
 		return repairedCars;
 	}
 	
-	public void setRepaired(CarTests car) {
+	public void setRepaired(Car car) {
 		notRepairedCars.remove(car);
 		repairedCars.add(car);
 	}
 	
-	public void setDelivered(CarTests car) {
+	public void setDelivered(Car car) {
 		repairedCars.remove(car);
 	}
 	
-	public void addNotRepairedCar (CarTests car) {//
+	public void addNotRepairedCar (Car car) {//
 		notRepairedCars.add(car);
 	}
 }
