@@ -1,6 +1,7 @@
 package model;
 
 public class Car {
+	
 	private Client owner;
 	private String name;
 	private int price;

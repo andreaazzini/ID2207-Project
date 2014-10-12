@@ -3,6 +3,9 @@ package model;
 import java.util.Date;
 
 public class Payment {
+	
+	private static IdHandler idHandler = new IdHandler();
+	private int id;
 	private Client client;
 	private Date date;
 	private int amount;
@@ -10,6 +13,7 @@ public class Payment {
 	private boolean approved;
 	
 	public Payment(Client client, int amount) {
+		this.id = idHandler.get();
 		this.client = client;
 		this.amount = amount;
 		this.date = new Date();
@@ -39,6 +43,10 @@ public class Payment {
 	
 	public int getAmount() {
 		return amount;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public boolean isApproved() {

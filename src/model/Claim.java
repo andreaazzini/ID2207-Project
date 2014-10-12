@@ -3,6 +3,7 @@ package model;
 import java.util.Date;
 
 public class Claim {
+	
 	private int id;
 	private static IdHandler idHandler = new IdHandler();
 	private String text;
@@ -13,6 +14,9 @@ public class Claim {
 	private String place;
 	private String policeReport;
 	
+	private boolean ok;
+	private boolean decided;
+	
 	public Claim(Client client, String text, int amount) {
 		id = idHandler.get();
 		date = new Date();
@@ -20,6 +24,7 @@ public class Claim {
 		this.text = text;
 		this.complex = false;
 		this.amount = amount;
+		decided = false;
 	}
 	
 	public Claim(Client client, String text, int amount, String place, String policeReport) {
@@ -69,5 +74,16 @@ public class Claim {
 	public String getPoliceReport() throws UnsupportedOperationException {
 		if (!this.complex) throw new UnsupportedOperationException();
 		return policeReport;
+	}
+	
+	public boolean isOK () throws UnsupportedOperationException {
+		if (!decided) {
+			throw new UnsupportedOperationException();
+		}
+		return ok;
+	}
+	
+	public void setOK (boolean ok) {
+		this.ok = ok;
 	}
 }

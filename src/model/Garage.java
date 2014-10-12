@@ -28,4 +28,8 @@ public class Garage {
 	public void setDelivered(Car car) {
 		repairedCars.remove(car);
 	}
+	
+	public void addNotRepairedCar (Car car) {//
+		notRepairedCars.add(car);
+	}
 }
