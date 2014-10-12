@@ -21,6 +21,7 @@ public class Client {
 		id = idHandler.get();
 		this.name = name;
 		this.surname = surname;
+		this.age = age;
 		this.email = email;
 		this.phone = phone;
 		this.setIBAN(IBAN);
