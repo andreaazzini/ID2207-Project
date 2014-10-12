@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-	
+
 	private int id;
 	private static IdHandler idHandler = new IdHandler();
 	private String name;
@@ -15,9 +15,8 @@ public class Client {
 	private List<Claim> claims;
 	private List<Car> cars;
 	private String IBAN;
-	
-	public Client(String name, String surname, int age, String email,
-			String phone, String IBAN, List<Car> cars) {
+
+	public Client(String name, String surname, int age, String email, String phone, String IBAN, List<Car> cars) {
 		id = idHandler.get();
 		this.name = name;
 		this.surname = surname;
@@ -27,6 +26,10 @@ public class Client {
 		this.setIBAN(IBAN);
 		claims = new ArrayList<Claim>();
 		this.cars = cars;
+	}
+	
+	public Client (String name, String surname, int age, String email, String phone, String IBAN) {
+		this(name, surname, age, email, phone, IBAN, new ArrayList<Car>());
 	}
 
 	public String getEmail() {
@@ -80,11 +83,11 @@ public class Client {
 	public List<Claim> getClaims() {
 		return claims;
 	}
-	
+
 	public void addCar(Car car) {
 		this.cars.add(car);
 	}
-	
+
 	public void removeCar(Car car) {
 		this.cars.remove(car);
 	}
@@ -112,4 +115,4 @@ public class Client {
 	}
 
 
-} 
+}
