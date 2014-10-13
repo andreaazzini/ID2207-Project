@@ -10,6 +10,7 @@ public class Car {
 	private String insurance;
 	
 	public Car(Client owner, String name, int price, String insurance) {
+		owner.addCar(this);
 		this.id = idHandler.get();
 		this.owner = owner;
 		this.name = name;

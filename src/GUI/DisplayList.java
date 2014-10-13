@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListDataListener;
 
+import model.Car;
 import model.Claim;
 import model.Client;
 import model.Payment;
@@ -24,15 +25,14 @@ public class DisplayList<E> extends JFrame {
 
 	private List<E> list;
 
-	public DisplayList(List<E> list) {
+	public DisplayList(List<E> list, String title) {
 
 		this.list = list;
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(500, 500);
-		setLocation(100, 100);
+		setLocation(400, 200);
 
-		// depends
-		setTitle("");
+		setTitle(title);
 
 		initGUI();
 	}
@@ -104,16 +104,18 @@ public class DisplayList<E> extends JFrame {
 
 	public static void main(String[] args) {
 		final List<Claim> claims = new ArrayList<>();
-		Client client = new Client("Name", "Surname", 20, "sdf@sdf", "0835548969", "0014HB");
-		Client client2 = new Client("asdfsdf", "sfsdf", 18, "sdf@", "0735548969", "0014HB");
-		claims.add(new Claim(client, "afsd", 452));
-		claims.add(new Claim(client2, "sdaf", 4554));
-		claims.add(new Claim(client2, "sdaf", 4554, "ansfjkandf", "police reports"));
+		Client client = new Client("Name", "Surname", 20, "name.surname@gmail.com", "0835548969", "0014HBIBAN");
+		Client client2 = new Client("Anne", "Rosalinda", 24, "rosa@hotmail.com", "0735548969", "55555HB");
+		new Car(client, "Toyota", 450000, "Insurance text");	
+		new Car(client2, "Ford", 355000, "Insurance text");
+		claims.add(new Claim(client, "This is the text of the claim", 10000));
+		claims.add(new Claim(client2, "This claim is simple", 4554));
+		claims.add(new Claim(client2, "This claim is complex.", 7000, "T-centralen", "Police report, very serious"));
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				new DisplayList<Claim>(claims).setVisible(true);
+				new DisplayList<Claim>(claims, "Claims").setVisible(true);
 
 			}
 		});

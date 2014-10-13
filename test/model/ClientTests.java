@@ -94,5 +94,16 @@ public class ClientTests {
 	public void getCarsTest() {
 		Assert.assertEquals(client.getCars(), cars);
 	}
+	
+	@Test
+	public void addClaimTest () {
+		new Claim(client, "This is a claim", 3999);
+		Assert.assertTrue(client.getClaims().size() == 1);
+		Assert.assertTrue(client.getClaims().get(0).getText().equals("This is a claim"));
+		Assert.assertTrue(client.getClaims().get(0).getAmount() == 3999);
+	}
+		
+		
+		
 
 }

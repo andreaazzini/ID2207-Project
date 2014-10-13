@@ -5,12 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
 import model.Client;
 import model.Payment;
@@ -26,6 +22,7 @@ public class PaymentView extends JFrame {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(500, 500);
 		setLocation(200, 200);
+		setTitle("Payment details");
 		
 		initGUI();
 	}
@@ -33,41 +30,29 @@ public class PaymentView extends JFrame {
 	private void initGUI() {
 		setLayout(new GridLayout(6, 2));
 		
-		add(new JLabel("id"));
-		JTextField id = new JTextField(String.valueOf(payment.getId()));
-		id.setEditable(false);
-		add(id);
+		addJLabel("Id");
+		addTextField(String.valueOf(payment.getId()));
 		
-		add(new JLabel("Client"));
-		JTextField client = new JTextField(payment.getClient().getName() + " " + payment.getClient().getSurname());
-		client.setEditable(false);
-		add(client);
+		addJLabel("Client");
+		addTextField(payment.getClient().getName() + " " + payment.getClient().getSurname());
 		
-		add(new JLabel("Date"));
-		JTextField date = new JTextField(payment.getDate().toString());
-		date.setEditable(false);
-		add(date);
+		addJLabel("Date");
+		addTextField(payment.getDate().toString());
 		
-		add(new JLabel("Amount"));
-		JTextField amount = new JTextField(String.valueOf(payment.getAmount()));
-		amount.setEditable(false);
-		add(amount);
+		addJLabel("Amount");
+		addTextField(String.valueOf(payment.getAmount()));
 		
-		add(new JLabel("IBAN"));
-		JTextField iban = new JTextField(payment.getIBAN());
-		iban.setEditable(false);
-		add(iban);
+		addJLabel("IBAN");
+		addTextField(payment.getIBAN());
 		
-		add(new JLabel("Approved"));
-		JTextField approved = new JTextField(payment.isApproved() ? "Approved" : "Not yet approved");
-		approved.setEditable(false);
-		add(approved);
+		addJLabel("Approved");
+		addTextField(payment.isApproved() ? "Approved" : "Not yet approved");
 	}
 
 	public static void main(String[] args) {
 		final List<Payment> list = new ArrayList<>();
-		Client client = new Client("Name", "Surname", 20, "sdf@sdf", "0835548969", "0014HB");
-		Client client2 = new Client("asdfsdf", "sfsdf", 18, "sdf@", "0735548969", "0014HB");
+		Client client = new Client("Name", "Surname", 20, "name.surname@gmail.com", "0835548969", "0014HBIBAN");
+		Client client2 = new Client("Anne", "Rosalinda", 24, "rosa@hotmail.com", "0735548969", "55555HB");
 		list.add(new Payment(client, 3000));
 		list.add(new Payment(client, 4000));
 		list.add(new Payment(client2, 5000));
@@ -78,10 +63,16 @@ public class PaymentView extends JFrame {
 			
 			@Override
 			public void run() {
-				new DisplayList<Payment>(list).setVisible(true);;
+				new DisplayList<Payment>(list, "Payments").setVisible(true);;
 			}
 		});
-		
+	}
+
+	private void addTextField (String content) {
+		ClientView.addTextFieldToFrame(this, content);
 	}
 	
+	private void addJLabel (String content) {
+		ClientView.addJLabelToFrame(this, content);
+	}
 }
