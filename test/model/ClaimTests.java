@@ -15,11 +15,17 @@ public class ClaimTests {
 	
 	@Before
 	public void setUp () {
-		client = new Client("afs", "sdf", 23, "asdf@adsf.com", "0735565888", "HS5343B", new ArrayList<Car>());
-		car = new Car(client, "yugo", 5000, "super-mega");
+		client = new Client(0, "afs", "sdf", 23, "asdf@adsf.com", "0735565888", "HS5343B", new ArrayList<Car>());
+		car = new Car(0, client, "yugo", 5000, "super-mega");
 		client.addCar(car);
-		claim1 = new Claim(client, "This is a claim", 1000);
-		claim2 = new Claim(client, "This is a complex claim", 10000, "T-centralen", "report");
+		claim1 = new Claim(0, client, "This is a claim", 1000);
+		claim2 = new Claim(1, client, "This is a complex claim", 10000, "T-centralen", "report");
+	}
+	
+	@Test
+	public void getIdTest() {
+		Assert.assertEquals(0, claim1.getId());
+		Assert.assertEquals(1, claim2.getId());
 	}
 	
 	@Test

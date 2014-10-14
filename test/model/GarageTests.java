@@ -18,10 +18,17 @@ public class GarageTests {
 	@Before
 	public void setUp () {
 		garage = new Garage();
-		client = new Client("adsf", "sf", 24, "sf@afd", "188165181", "8s4d8f", new ArrayList<Car>());
-		car1 = new Car(client, "toyota", 450000, "high");
-		car2 = new Car(client, "honda", 550000, "high");
-		car3 = new Car(client, "suzuki", 300000, "medium");
+		client = new Client(0, "adsf", "sf", 24, "sf@afd", "188165181", "8s4d8f", new ArrayList<Car>());
+		car1 = new Car(0, client, "toyota", 450000, "high");
+		car2 = new Car(1, client, "honda", 550000, "high");
+		car3 = new Car(2, client, "suzuki", 300000, "medium");
+	}
+	
+	@Test
+	public void idTest() {
+		Assert.assertFalse(car1.getId() == car2.getId());
+		Assert.assertFalse(car1.getId() == car3.getId());
+		Assert.assertFalse(car2.getId() == car3.getId());
 	}
 	
 	@Test

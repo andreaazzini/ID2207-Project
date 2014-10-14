@@ -14,7 +14,12 @@ public class ClientTests {
 	@Before
 	public void setUp () {
 		cars = new ArrayList<Car>();
-		client = new Client("a", "v", 18, "sdf@", "0735548969", "0014HB", cars);
+		client = new Client(0, "a", "v", 18, "sdf@", "0735548969", "0014HB", cars);
+	}
+	
+	@Test
+	public void getIdTest() {
+		Assert.assertEquals(0, client.getId());
 	}
 	
 	@Test
@@ -76,7 +81,7 @@ public class ClientTests {
 	
 	@Test
 	public void addCarTest() {
-		Car car = new Car(client, "Fiat", 300000, "normal");
+		Car car = new Car(0, client, "Fiat", 300000, "normal");
 		client.addCar(car);
 		cars.add(car);
 		Assert.assertEquals(client.getCars(), cars);
@@ -84,7 +89,7 @@ public class ClientTests {
 	
 	@Test
 	public void removeCarTest() {
-		Car car = new Car(client, "Fiat", 300000, "normal");
+		Car car = new Car(0, client, "Fiat", 300000, "normal");
 		client.addCar(car);
 		client.removeCar(car);
 		Assert.assertEquals(client.getCars(), cars);
@@ -97,7 +102,7 @@ public class ClientTests {
 	
 	@Test
 	public void addClaimTest () {
-		new Claim(client, "This is a claim", 3999);
+		new Claim(1, client, "This is a claim", 3999);
 		Assert.assertTrue(client.getClaims().size() == 1);
 		Assert.assertTrue(client.getClaims().get(0).getText().equals("This is a claim"));
 		Assert.assertTrue(client.getClaims().get(0).getAmount() == 3999);

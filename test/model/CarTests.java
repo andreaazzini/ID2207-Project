@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,8 +13,13 @@ public class CarTests {
 	
 	@Before
 	public void setUp () {
-		client = new Client("a", "v", 18, "sdf@", "0735548969", "0014HB", null);
-		car = new Car(client, "Skoda", 200000, "normal");
+		client = new Client(0, "a", "v", 18, "sdf@", "0735548969", "0014HB", new ArrayList<Car>());
+		car = new Car(0, client, "Skoda", 200000, "normal");
+	}
+	
+	@Test
+	public void getIdTest() {
+		Assert.assertEquals(0, car.getId());
 	}
 	
 	@Test
