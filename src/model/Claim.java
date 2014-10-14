@@ -5,7 +5,6 @@ import java.util.Date;
 public class Claim {
 	
 	private int id;
-	private static IdHandler idHandler = new IdHandler();
 	private String text;
 	private Client client;
 	private Date date;
@@ -17,9 +16,9 @@ public class Claim {
 	private boolean ok;
 	private boolean decided;
 	
-	public Claim(Client client, String text, int amount) {
+	public Claim(int id, Client client, String text, int amount) {
 		client.addClaim(this);
-		id = idHandler.get();
+		this.id = id;
 		date = new Date();
 		this.client = client;
 		this.text = text;
@@ -28,8 +27,8 @@ public class Claim {
 		decided = false;
 	}
 	
-	public Claim(Client client, String text, int amount, String place, String policeReport) {
-		this(client, text, amount);
+	public Claim(int id, Client client, String text, int amount, String place, String policeReport) {
+		this(id, client, text, amount);
 		complex = true;
 		this.place = place;
 		this.policeReport = policeReport;

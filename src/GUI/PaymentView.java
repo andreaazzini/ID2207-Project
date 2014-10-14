@@ -51,12 +51,12 @@ public class PaymentView extends JFrame {
 
 	public static void main(String[] args) {
 		final List<Payment> list = new ArrayList<>();
-		Client client = new Client("Name", "Surname", 20, "name.surname@gmail.com", "0835548969", "0014HBIBAN");
-		Client client2 = new Client("Anne", "Rosalinda", 24, "rosa@hotmail.com", "0735548969", "55555HB");
-		list.add(new Payment(client, 3000));
-		list.add(new Payment(client, 4000));
-		list.add(new Payment(client2, 5000));
-		Payment pay = new Payment(client2, 30393);
+		Client client = new Client(0, "Name", "Surname", 20, "name.surname@gmail.com", "0835548969", "0014HBIBAN");
+		Client client2 = new Client(1, "Anne", "Rosalinda", 24, "rosa@hotmail.com", "0735548969", "55555HB");
+		list.add(new Payment(0, client, 3000));
+		list.add(new Payment(1, client, 4000));
+		list.add(new Payment(2, client2, 5000));
+		Payment pay = new Payment(3, client2, 30393);
 		pay.approve();
 		list.add(pay);
 		SwingUtilities.invokeLater(new Runnable() {

@@ -2,16 +2,15 @@ package model;
 
 public class Car {
 	
-	private IdHandler idHandler = new IdHandler();
 	private int id;
 	private Client owner;
 	private String name;
 	private int price;
 	private String insurance;
 	
-	public Car(Client owner, String name, int price, String insurance) {
+	public Car(int id, Client owner, String name, int price, String insurance) {
 		owner.addCar(this);
-		this.id = idHandler.get();
+		this.id = id;
 		this.owner = owner;
 		this.name = name;
 		this.price = price;

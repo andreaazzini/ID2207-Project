@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Payment {
 	
-	private static IdHandler idHandler = new IdHandler();
 	private int id;
 	private Client client;
 	private Date date;
@@ -12,8 +11,8 @@ public class Payment {
 	private String IBAN;
 	private boolean approved;
 	
-	public Payment(Client client, int amount) {
-		this.id = idHandler.get();
+	public Payment(int id, Client client, int amount) {
+		this.id = id;
 		this.client = client;
 		this.amount = amount;
 		this.date = new Date();

@@ -1,0 +1,5 @@
+admin	adminpass	0	Administrator	One
+jantom	jantompass	0	Jan	Tomljanović
+andazz	andazzpass	0	Andrea	Azzini
+mario	mariopass	1	Mario	Markich
+paolo	paolopass	2	Paolo	Rossi

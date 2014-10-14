@@ -6,7 +6,6 @@ import java.util.List;
 public class Client {
 
 	private int id;
-	private static IdHandler idHandler = new IdHandler();
 	private String name;
 	private String surname;
 	private int age;
@@ -16,8 +15,8 @@ public class Client {
 	private List<Car> cars;
 	private String IBAN;
 
-	public Client(String name, String surname, int age, String email, String phone, String IBAN, List<Car> cars) {
-		id = idHandler.get();
+	public Client(int id, String name, String surname, int age, String email, String phone, String IBAN, List<Car> cars) {
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
@@ -28,8 +27,8 @@ public class Client {
 		this.cars = cars;
 	}
 	
-	public Client (String name, String surname, int age, String email, String phone, String IBAN) {
-		this(name, surname, age, email, phone, IBAN, new ArrayList<Car>());
+	public Client (int id, String name, String surname, int age, String email, String phone, String IBAN) {
+		this(id, name, surname, age, email, phone, IBAN, new ArrayList<Car>());
 	}
 	
 	public void addClaim (Claim claim) {
