@@ -1,13 +1,11 @@
 package model;
 
-import java.util.Date;
-
 public class Claim {
 	
 	private int id;
 	private String text;
 	private Client client;
-	private Date date;
+	private String date;
 	private boolean complex;
 	private int amount;
 	private String place;
@@ -16,10 +14,12 @@ public class Claim {
 	private boolean ok;
 	private boolean decided;
 	
-	public Claim(int id, Client client, String text, int amount) {
-		client.addClaim(this);
+	public Claim(int id, String date, Client client, String text, int amount) {
+		if (client != null) {
+			client.addClaim(this);
+		}
 		this.id = id;
-		date = new Date();
+		this.date = date;
 		this.client = client;
 		this.text = text;
 		this.complex = false;
@@ -27,18 +27,18 @@ public class Claim {
 		decided = false;
 	}
 	
-	public Claim(int id, Client client, String text, int amount, String place, String policeReport) {
-		this(id, client, text, amount);
+	public Claim(int id, String date, Client client, String text, int amount, String place, String policeReport) {
+		this(id, date, client, text, amount);
 		complex = true;
 		this.place = place;
 		this.policeReport = policeReport;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -60,6 +60,10 @@ public class Claim {
 
 	public Client getClient() {
 		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public boolean isComplex() {

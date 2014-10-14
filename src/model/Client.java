@@ -33,6 +33,7 @@ public class Client {
 	
 	public void addClaim (Claim claim) {
 		claims.add(claim);
+		claim.setClient(this);
 	}
 
 	public String getEmail() {
@@ -89,6 +90,7 @@ public class Client {
 
 	public void addCar(Car car) {
 		this.cars.add(car);
+		car.setOwner(this);
 	}
 
 	public void removeCar(Car car) {

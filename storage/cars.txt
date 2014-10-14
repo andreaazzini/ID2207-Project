@@ -1,0 +1,6 @@
+0	toyota	1000	This is insurance text
+1	honda	10000	Insurance
+2	ferrari	45555	High insurance
+3	porsche	788956	Very high insurance
+4	suzuki	4555	Normal insurance
+5	ford	7879	Low insurance

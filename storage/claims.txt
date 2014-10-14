@@ -1,0 +1,6 @@
+0	this is a text	13.6.1992.	1	11000	place	police report
+1	this is also a text	12.10.1995.	0	4522
+2	I want my money	12.9.1998.	1	34444	T-centralen	It was bad
+3	bla bla bla	12.6.2003.	0	999
+4	text text text	30.9.2011.	1	100000	Milano	police says bla
+5	ta ta ta	9.9.2014.	0	45454

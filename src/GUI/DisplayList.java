@@ -110,11 +110,11 @@ public class DisplayList<E> extends JFrame {
 		Client client2 = new Client(1, "Anne", "Rosalinda", 24, "rosa@hotmail.com", "0735548969", "55555HB");
 		new Car(0, client, "Toyota", 450000, "Insurance text");	
 		new Car(1, client2, "Ford", 355000, "Insurance text");
-		Claim claim = new Claim(0, client, "This is the text of the claim", 10000);
+		Claim claim = new Claim(0, "21.12.2011.", client, "This is the text of the claim", 10000);
 		claim.setOK(true);
 		claims.add(claim);
-		claims.add(new Claim(1, client2, "This claim is simple", 4554));
-		claims.add(new Claim(2, client2, "This claim is complex.", 7000, "T-centralen", "Police report, very serious"));
+		claims.add(new Claim(1, "12.12.2002.", client2, "This claim is simple", 4554));
+		claims.add(new Claim(2, "1.1.2022.", client2, "This claim is complex.", 7000, "T-centralen", "Police report, very serious"));
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override

@@ -8,13 +8,21 @@ public class Car {
 	private int price;
 	private String insurance;
 	
+	
+	
 	public Car(int id, Client owner, String name, int price, String insurance) {
-		owner.addCar(this);
+		if (owner != null) {
+			owner.addCar(this);
+		}
 		this.id = id;
 		this.owner = owner;
 		this.name = name;
 		this.price = price;
 		this.insurance = insurance;
+	}
+
+	public void setOwner(Client owner) {
+		this.owner = owner;
 	}
 
 	public int getId() {

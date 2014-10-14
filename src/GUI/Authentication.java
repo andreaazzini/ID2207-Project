@@ -54,6 +54,9 @@ public class Authentication extends JFrame {
 		add(panel, BorderLayout.CENTER);
 		
 		JButton login = new JButton("OK");
+		
+		final Authentication pointer = this;
+		
 		login.addActionListener(new ActionListener() {
 			
 			@Override
@@ -62,7 +65,8 @@ public class Authentication extends JFrame {
 				String password = new String(passText.getPassword());
 				boolean ok = SessionHandler.authenticate(username, password);
 				if (ok) {
-					// start main window
+					pointer.dispose();
+					new MainView().setVisible(true);
 				}
 				else {
 					label.setText("Authentication failed, wrong username or password");
@@ -76,7 +80,7 @@ public class Authentication extends JFrame {
 	
 
 	public static void main(String[] args) throws IOException {
-		StorageHandler.loadUsers("storage/users.txt");
+		StorageHandler.loadAll();
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
@@ -85,5 +89,7 @@ public class Authentication extends JFrame {
 			}
 		});
 	}
+	
+	
 	
 }
