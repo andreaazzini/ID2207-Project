@@ -68,5 +68,9 @@ public class Car {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("%4d %11s    OWNER: %s %s", id, name, owner.getName(), owner.getSurname());
+	}
 
 }

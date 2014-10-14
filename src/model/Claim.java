@@ -85,6 +85,7 @@ public class Claim {
 	}
 	
 	public void setOK (boolean ok) {
+		decided = true;
 		this.ok = ok;
 	}
 
@@ -112,8 +113,8 @@ public class Claim {
 
 	@Override
 	public String toString() {
-		String approved = this.decided ? (this.ok ? "Approved" : "Not approved") : "Ongoing";
-		//styling could be improved
-		return this.id + "    " + this.client.getName() +"    " + this.client.getSurname() + "    " + approved; 
+		String approved = decided ? (ok ? "Approved" : "Not approved") : "Ongoing";
+		return String.format("%4d %13s %13s %12s", id, client.getName(), client.getSurname(), approved);
 	}
+	
 }

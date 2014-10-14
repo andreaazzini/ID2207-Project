@@ -81,6 +81,6 @@ public class Payment {
 	
 	@Override
 	public String toString() {
-		return this.id + "    " + this.client.getName() + "    " + this.client.getSurname();
+		return String.format("%4d %13s %13s %7dSEK", id, client.getName(), client.getSurname(), amount);
 	}
 }

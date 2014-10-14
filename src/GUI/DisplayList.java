@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class DisplayList<E> extends JFrame {
 
 		DisplayListModel<E> ourModel = new DisplayListModel<E>(list);
 		JList<E> jlist = new JList<>(ourModel);
+		jlist.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		JScrollPane scroll = new JScrollPane(jlist);
 
 		jlist.addMouseListener(new MouseAdapter() {
@@ -108,7 +110,9 @@ public class DisplayList<E> extends JFrame {
 		Client client2 = new Client("Anne", "Rosalinda", 24, "rosa@hotmail.com", "0735548969", "55555HB");
 		new Car(client, "Toyota", 450000, "Insurance text");	
 		new Car(client2, "Ford", 355000, "Insurance text");
-		claims.add(new Claim(client, "This is the text of the claim", 10000));
+		Claim claim = new Claim(client, "This is the text of the claim", 10000);
+		claim.setOK(true);
+		claims.add(claim);
 		claims.add(new Claim(client2, "This claim is simple", 4554));
 		claims.add(new Claim(client2, "This claim is complex.", 7000, "T-centralen", "Police report, very serious"));
 		SwingUtilities.invokeLater(new Runnable() {

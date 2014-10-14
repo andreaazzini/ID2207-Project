@@ -40,7 +40,7 @@ public class PaymentView extends JFrame {
 		addTextField(payment.getDate().toString());
 		
 		addJLabel("Amount");
-		addTextField(String.valueOf(payment.getAmount()));
+		addTextField(String.valueOf(payment.getAmount()) + "SEK");
 		
 		addJLabel("IBAN");
 		addTextField(payment.getIBAN());
