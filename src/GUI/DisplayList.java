@@ -27,12 +27,12 @@ public class DisplayList<E> extends JFrame {
 
 		this.list = list;
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(500, 500);
-		setLocation(400, 200);
+		setLocation(850, 300);
 
 		setTitle(title);
 
 		initGUI();
+		pack();
 	}
 
 	private void initGUI() {

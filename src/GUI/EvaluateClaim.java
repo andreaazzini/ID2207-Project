@@ -34,10 +34,11 @@ public class EvaluateClaim extends JFrame {
 	public EvaluateClaim(Client client) {
 		this.client = client;
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(250, 350);
-		setLocation(300, 350);
-
+		setLocation(600, 450);
+		setTitle("Report");
+		
 		initGUI();
+		pack();
 	}
 
 	private void initGUI() {
@@ -69,8 +70,13 @@ public class EvaluateClaim extends JFrame {
 
 		center.add(up);
 
+		final EvaluateClaim pointer = this;
+		
+		JPanel wrap = new JPanel();
+		
 		JButton button = new JButton("See client's claims");
-		center.add(button);
+		wrap.add(button);
+		center.add(wrap);
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -84,7 +90,7 @@ public class EvaluateClaim extends JFrame {
 		JLabel damageText = new JLabel("Cost of damage");
 		damage.add(damageText);
 		final JTextField amount = new JTextField();
-		amount.setPreferredSize(new Dimension(110, 50));
+		amount.setPreferredSize(new Dimension(100, 25));
 		damage.add(amount);
 		
 		center.add(damage);
@@ -100,8 +106,6 @@ public class EvaluateClaim extends JFrame {
 		south.add(notSevere);
 		
 		add(south, BorderLayout.SOUTH);
-		
-		final EvaluateClaim pointer = this;
 		
 		severe.addActionListener(new ActionListener() {
 			
@@ -190,11 +194,12 @@ public class EvaluateClaim extends JFrame {
 		}
 		
 		if (wrong) {
-			JOptionPane.showMessageDialog(parent, "Insert cost of damage");
+			JOptionPane.showMessageDialog(parent, "Not all fields are correctly filled");
 		}
 		else {
 			Car car = client.getCars().get(index);
 			new Form(client, severe, car, damage).setVisible(true);
+			parent.dispose();
 		}
 	}
 

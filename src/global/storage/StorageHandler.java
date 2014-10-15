@@ -156,9 +156,23 @@ public class StorageHandler {
 		}
 		return id;
 	}
+	
+	public static int getBiggestPaymentId() {
+		Integer id = -1;
+		for (Payment pay : payments.values()) {
+			if (pay.getId() > id) {
+				id = pay.getId();
+			}
+		}
+		return id;
+	}
 
 	public static void addNewClaim(Claim claim) {
 		claims.put(claim.getId(), claim);
+	}
+	
+	public static void addNewPayment(Payment payment) {
+		payments.put(payment.getId(), payment);
 	}
 
 }

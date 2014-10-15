@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,6 +24,7 @@ import javax.swing.WindowConstants;
 import model.Car;
 import model.Claim;
 import model.Client;
+import model.Payment;
 
 public class Form extends JFrame {
 
@@ -39,7 +41,8 @@ public class Form extends JFrame {
 	private JTextArea policeReport;
 	private JLabel policeReportLabel;
 
-	private int rows;
+	private int rows1;
+	private int rows2;
 
 	private Client client;
 	private boolean severe;
@@ -54,27 +57,31 @@ public class Form extends JFrame {
 		this.costOfDamage = costOfDamage;
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(400, 800);
-		setLocation(350, 150);
+		setSize(400, 680);
+		setLocation(250, 250);
 		setTitle("Claim form");
 
-		rows = severe ? 7 : 5;
+		rows1 = severe ? 5 : 4;
+		rows2 = severe ? 2 : 1;
 
 		initGUI();
+		pack();
 	}
 
 	private void initGUI() {
 		setLayout(new BorderLayout());
 
-		JPanel parent = new JPanel();
-		parent.setLayout(new GridLayout(rows, 1));
-		
+		JPanel parent1 = new JPanel();
+		parent1.setLayout(new GridLayout(rows1, 1));
+		JPanel parent2 = new JPanel();
+		parent2.setLayout(new GridLayout(rows2, 1));
+
 		JTextField nameField = new JTextField();
 		nameField.setEditable(false);
 		JTextField carField = new JTextField();
 		carField.setEditable(false);
-		
-		
+
+
 		amountLabel = new JLabel();
 		dateLabel = new JLabel();
 		textLabel = new JLabel();
@@ -90,27 +97,32 @@ public class Form extends JFrame {
 		text = new JTextArea();
 		place = new JTextField();
 		policeReport = new JTextArea();
-		
 
-		addTextField(parent, nameField, client.getName() + " " + client.getSurname(), "Name", new JLabel(),
-				false);
-		addTextField(parent, carField, car.getName() + ", " + car.getPrice() + "SEK", "Car, price",
-				new JLabel(), false);
-		addTextField(parent, date, "", "Date", dateLabel, false);
-		addTextField(parent, amount, costOfDamage.toString(), "Amount", amountLabel, false);
-		addTextField(parent, text, "", "Text", textLabel, true);
+
+		addTextField(parent1, nameField, client.getName() + " " + client.getSurname(), "Name", new JLabel(), false);
+		addTextField(parent1, carField, car.getName() + ", " + car.getPrice() + "SEK", "Car, price", new JLabel(), false);
+		addTextField(parent1, date, "", "Date", dateLabel, false);
+		addTextField(parent1, amount, costOfDamage.toString(), "Amount", amountLabel, false);
 		if (severe) {
-			addTextField(parent, place, "", "Place", placeLabel, false);
-			addTextField(parent, policeReport, "", "Police report", policeReportLabel, true);
+			addTextField(parent1, place, "", "Place", placeLabel, false);
 		}
-
+		addTextField(parent2, text, "", "Text", textLabel, true);
+		if (severe) {
+			addTextField(parent2, policeReport, "", "Police report", policeReportLabel, true);
+		}
+		
+		JPanel parent = new JPanel();
+		parent.setLayout(new GridLayout(2, 1));
+		parent.add(parent1);
+		parent.add(parent2);
+		
 		add(parent, BorderLayout.CENTER);
 
 		JButton submit = new JButton("Submit");
 		add(submit, BorderLayout.SOUTH);
-		
+
 		final Form pointer = this;
-		
+
 		submit.addActionListener(new ActionListener() {
 
 			@Override
@@ -145,6 +157,10 @@ public class Form extends JFrame {
 
 				if (done) {
 					Integer newId = StorageHandler.getBiggestClaimId() + 1;
+					Integer newPaymentId = StorageHandler.getBiggestPaymentId() + 1;
+					Calendar c = Calendar.getInstance();
+					String today = c.get(Calendar.DAY_OF_MONTH) + "." + (c.get(Calendar.MONTH)+1) + "."
+							+ c.get(Calendar.YEAR) + ".";
 					Claim claim;
 					if (!severe) {
 						claim = new Claim(newId, date.getText(), client, text.getText(), Integer.parseInt(amount
@@ -153,9 +169,12 @@ public class Form extends JFrame {
 						claim = new Claim(newId, date.getText(), client, text.getText(), Integer.parseInt(amount
 								.getText()), car, place.getText(), policeReport.getText());
 					}
-					StorageHandler.addNewClaim (claim);
+					StorageHandler.addNewClaim(claim);
+					Payment payment = new Payment(newPaymentId, today, client, Integer.parseInt(amount.getText()));
+					StorageHandler.addNewPayment(payment);
 					pointer.dispose();
-					JOptionPane.showMessageDialog(pointer, "Claim has been registered", "Claim registration", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(pointer, "Claim has been registered", "Claim registration",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -164,37 +183,38 @@ public class Form extends JFrame {
 	// area or field
 	private void addTextField(JPanel parent, Object field, String text, String name, JLabel control, boolean area) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(2, 1));
+		panel.setLayout(new BorderLayout());
 
 		JPanel up = new JPanel();
 
 		JLabel label = new JLabel(name);
-		
-		control.setPreferredSize(new Dimension(250, 25));
-		control.setSize(250, 25);
+
+		JPanel labelWrap = new JPanel();
+		control.setPreferredSize(new Dimension(250, 8));
+		control.setSize(250, 8);
 		control.setHorizontalAlignment(SwingConstants.CENTER);
+		labelWrap.add(control);
 
 		if (area) {
-			JTextArea box = ((JTextArea) field); 
+			JTextArea box = ((JTextArea) field);
 			box.setText(text);
-			box.setSize(150, 70);
-			box.setPreferredSize(new Dimension(125, 70));
+			box.setSize(250, 60);
+			box.setPreferredSize(new Dimension(250, 60));
 			JScrollPane pane = new JScrollPane(box);
 			up.add(label);
 			up.add(pane);
 		} else {
-			JTextField box = ((JTextField) field); 
+			JTextField box = ((JTextField) field);
 			box.setText(text);
-			box.setSize(140, 25);
-			box.setPreferredSize(new Dimension(125, 25));
+			box.setSize(140, 20);
+			box.setPreferredSize(new Dimension(125, 20));
 			up.add(label);
 			up.add(box);
 		}
 
-		panel.add(up);
-		panel.add(control);
-		control.setAlignmentX(CENTER_ALIGNMENT);
 
+		panel.add(up, BorderLayout.CENTER);
+		panel.add(labelWrap, BorderLayout.SOUTH);
 		parent.add(panel);
 	}
 

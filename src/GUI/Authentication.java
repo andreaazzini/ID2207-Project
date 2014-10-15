@@ -8,7 +8,6 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import model.Employment;
@@ -31,7 +29,7 @@ public class Authentication extends JFrame {
 	public Authentication() {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(320, 125);
-		setLocation(500, 500);
+		setLocation(550, 300);
 		setTitle("Authentication");
 		setResizable(false);
 		
@@ -90,17 +88,4 @@ public class Authentication extends JFrame {
 	}
 	
 
-	public static void main(String[] args) throws IOException {
-		StorageHandler.loadAll();
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new Authentication().setVisible(true);
-			}
-		});
-	}
-	
-	
-	
 }

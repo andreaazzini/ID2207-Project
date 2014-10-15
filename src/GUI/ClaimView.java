@@ -33,7 +33,7 @@ public class ClaimView extends JFrame {
 		this.claim = claim;
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(500, 500);
-		setLocation(500, 300);
+		setLocation(550, 300);
 		setTitle("Claim details");
 
 		initGUI();

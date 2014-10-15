@@ -27,7 +27,7 @@ public class CheckInsurance extends JFrame {
 	public CheckInsurance() {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(300, 125);
-		setLocation(300, 300);
+		setLocation(550, 450);
 		setTitle("Check insurance");
 
 		initGUI();

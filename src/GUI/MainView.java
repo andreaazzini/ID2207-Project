@@ -26,10 +26,11 @@ public class MainView extends JFrame {
 
 	public MainView() {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(250, 250);
-		setLocation(400, 400);
-
+		setLocation(600, 300);
+		setTitle("Main");
+		
 		initGUI();
+		pack();
 	}
 
 	private void initGUI() {

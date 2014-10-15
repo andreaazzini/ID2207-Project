@@ -9,12 +9,17 @@ import org.junit.Test;
 
 public class ClientTests {
 	private Client client;
+	private Client client2;
 	private List<Car> cars;
+	private Car car;
+	
 	
 	@Before
 	public void setUp () {
 		cars = new ArrayList<Car>();
+		car = new Car(0, client, "Fiat", 45, "No insurance");
 		client = new Client(0, "a", "v", 18, "sdf@", "0735548969", "0014HB", cars);
+		client2 = new Client(1, "perica", "marica", 35, "perica.marica@net.com", "078542258", "21ff11f2");
 	}
 	
 	@Test
@@ -102,12 +107,33 @@ public class ClientTests {
 	
 	@Test
 	public void addClaimTest () {
-		new Claim(1, client, "This is a claim", 3999);
+		new Claim(1, "2.3.2039.", client, "This is a claim", 455, car, "place", "report", true, true);
 		Assert.assertTrue(client.getClaims().size() == 1);
 		Assert.assertTrue(client.getClaims().get(0).getText().equals("This is a claim"));
-		Assert.assertTrue(client.getClaims().get(0).getAmount() == 3999);
+		Assert.assertTrue(client.getClaims().get(0).getAmount() == 455);
 	}
-		
+	
+	@Test
+	public void hashcodeTest1 () {
+		Assert.assertNotEquals(client.hashCode(), client2.hashCode());
+	}
+	
+	@Test
+	public void hashcodeTest2 () {
+		Client client3 = new Client(0, "perica", "marica", 35, "perica.marica@net.com", "078542258", "21ff11f2");
+		Assert.assertEquals(client.hashCode(), client3.hashCode());
+	}
+	
+	@Test
+	public void equalsTest () {
+		Assert.assertNotEquals(client, client2);
+	}
+	
+	@Test
+	public void equalsTest2 () {
+		Client client3 = new Client(1, "perica", "marica", 35, "perica.marica@net.com", "078542258", "21ff11f2");
+		Assert.assertEquals(client2, client3);
+	}	
 		
 		
 

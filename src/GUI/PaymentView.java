@@ -50,7 +50,7 @@ public class PaymentView extends JFrame {
 		addJLabel(center, "Date");
 		JTextField date = new JTextField(payment.getDate().toString());
 		date.setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
-		date.setBackground(Color.gray);
+		date.setBackground(Color.lightGray);
 		date.setHorizontalAlignment(SwingConstants.CENTER);
 		center.add(date);
 		

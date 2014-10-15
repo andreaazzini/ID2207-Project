@@ -29,7 +29,7 @@ public class ClientView extends JFrame{
 		
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(500, 500);
-		setLocation(200, 200);
+		setLocation(20, 300);
 		setTitle("Client details");
 		initGui();
 		

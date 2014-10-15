@@ -23,7 +23,7 @@ public class Letter extends JFrame {
 		this.client = client;
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setSize(400, 400);
-		setLocation(300, 300);
+		setLocation(1050, 300);
 		setTitle("Letter");
 
 		initGUI();
