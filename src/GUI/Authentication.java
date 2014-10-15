@@ -49,7 +49,9 @@ public class Authentication extends JFrame {
 		JLabel usr = new JLabel("Username");
 		JLabel pass = new JLabel("Password");
 		final JTextField usrText = new JTextField();
+		usrText.setName("UsernameField");  /* ******************************/
 		final JPasswordField passText = new JPasswordField();
+		passText.setName("PasswordField"); /* **********************************/
 		panel.add(usr);
 		panel.add(usrText);
 		panel.add(pass);
@@ -57,6 +59,7 @@ public class Authentication extends JFrame {
 		add(panel, BorderLayout.CENTER);
 		
 		JButton login = new JButton("OK");
+		login.setName("OK");
 		
 		final Authentication pointer = this;
 		

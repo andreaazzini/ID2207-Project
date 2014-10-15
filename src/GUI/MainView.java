@@ -40,6 +40,7 @@ public class MainView extends JFrame {
 		JLabel user = new JLabel(SessionHandler.getCurrentUser().getName() + " "
 				+ SessionHandler.getCurrentUser().getSurname());
 		JButton logout = new JButton("Logout");
+		logout.setName("LogoutButton");
 		
 		final MainView pointer = this;
 		
@@ -63,6 +64,7 @@ public class MainView extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
 		JButton viewClaims = new JButton("See claims");
+		viewClaims.setName("ViewAllClaims");
 		JButton registerNewClaim = new JButton("Register new claim");
 		
 		panel.add(viewClaims);
