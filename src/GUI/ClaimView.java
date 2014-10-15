@@ -45,6 +45,7 @@ public class ClaimView extends JFrame {
 		north.setLayout(new GridLayout(1, 2));
 		north.add(new JLabel("Claim #" + String.valueOf(claim.getId())));
 		JButton clientButton = new JButton(claim.getClient().getName() + " " + claim.getClient().getSurname());
+		clientButton.setName("ClientButton");
 		clientButton.setBackground(Color.lightGray);
 		north.add(clientButton);
 		add(north, BorderLayout.NORTH);

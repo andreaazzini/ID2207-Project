@@ -40,6 +40,7 @@ public class DisplayList<E> extends JFrame {
 
 		DisplayListModel<E> ourModel = new DisplayListModel<E>(list);
 		JList<E> jlist = new JList<>(ourModel);
+		jlist.setName("JList");
 		jlist.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		JScrollPane scroll = new JScrollPane(jlist);
 

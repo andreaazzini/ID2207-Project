@@ -2,9 +2,6 @@ package GUI;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Frame;
-
-import javax.swing.JFrame;
 
 public class TestUtils {
 
