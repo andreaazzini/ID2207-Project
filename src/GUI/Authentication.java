@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +20,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+
+import model.Employment;
+import model.Payment;
 
 public class Authentication extends JFrame {
 
@@ -66,7 +71,13 @@ public class Authentication extends JFrame {
 				boolean ok = SessionHandler.authenticate(username, password);
 				if (ok) {
 					pointer.dispose();
-					new MainView().setVisible(true);
+					if (!SessionHandler.getCurrentUser().getEmployment().equals(Employment.FINANACIAL_EMPLOYEE)) {
+						new MainView().setVisible(true);
+					}
+					else {
+						List<Payment> payments = new ArrayList<Payment>(StorageHandler.getPayments().values());
+						new DisplayList<Payment>(payments, "All payments").setVisible(true);
+					}
 				}
 				else {
 					label.setText("Authentication failed, wrong username or password");

@@ -107,7 +107,7 @@ public class EvaluateClaim extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				evaluateClaim(true, amount, pointer);
+				evaluateClaim(true, amount, pointer, combo, client);
 			}
 		});
 		
@@ -115,7 +115,7 @@ public class EvaluateClaim extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				evaluateClaim(false, amount, pointer);
+				evaluateClaim(false, amount, pointer, combo, client);
 			}
 		});
 
@@ -171,11 +171,12 @@ public class EvaluateClaim extends JFrame {
 
 	}
 	
-	private static void evaluateClaim (boolean severe, JTextField amount, JFrame parent) {
+	private static void evaluateClaim (boolean severe, JTextField amount, JFrame parent, JComboBox<String> combo, Client client) {
 		boolean wrong = false;
+		Integer damage = null;
 		if (!amount.getText().isEmpty()) {
 			try {
-				Integer.parseInt(amount.getText());
+				damage = Integer.parseInt(amount.getText());
 			} catch (NumberFormatException e) {
 				wrong = true;
 			}
@@ -183,11 +184,17 @@ public class EvaluateClaim extends JFrame {
 		else {
 			wrong = true;
 		}
+		Integer index = combo.getSelectedIndex();
+		if (index == -1) {
+			wrong = true;
+		}
+		
 		if (wrong) {
 			JOptionPane.showMessageDialog(parent, "Insert cost of damage");
 		}
 		else {
-			// depending on the severe, send complex or simple form to the client
+			Car car = client.getCars().get(index);
+			new Form(client, severe, car, damage).setVisible(true);
 		}
 	}
 

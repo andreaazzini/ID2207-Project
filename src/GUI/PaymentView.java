@@ -1,14 +1,22 @@
 package GUI;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
+import javax.swing.border.Border;
 
-import model.Client;
 import model.Payment;
 
 public class PaymentView extends JFrame {
@@ -28,51 +36,68 @@ public class PaymentView extends JFrame {
 	}
 
 	private void initGUI() {
-		setLayout(new GridLayout(6, 2));
+		setLayout(new BorderLayout());
 		
-		addJLabel("Id");
-		addTextField(String.valueOf(payment.getId()));
+		JPanel center = new JPanel();
+		center.setLayout(new GridLayout(6, 2));
 		
-		addJLabel("Client");
-		addTextField(payment.getClient().getName() + " " + payment.getClient().getSurname());
+		addJLabel(center, "Id");
+		addTextField(center, String.valueOf(payment.getId()));
 		
-		addJLabel("Date");
-		addTextField(payment.getDate().toString());
+		addJLabel(center, "Client");
+		addTextField(center, payment.getClient().getName() + " " + payment.getClient().getSurname());
 		
-		addJLabel("Amount");
-		addTextField(String.valueOf(payment.getAmount()) + "SEK");
+		addJLabel(center, "Date");
+		JTextField date = new JTextField(payment.getDate().toString());
+		date.setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
+		date.setBackground(Color.gray);
+		date.setHorizontalAlignment(SwingConstants.CENTER);
+		center.add(date);
 		
-		addJLabel("IBAN");
-		addTextField(payment.getIBAN());
+		addJLabel(center, "Amount");
+		addTextField(center, String.valueOf(payment.getAmount()) + "SEK");
 		
-		addJLabel("Approved");
-		addTextField(payment.isApproved() ? "Approved" : "Not yet approved");
-	}
+		addJLabel(center, "IBAN");
+		addTextField(center, payment.getIBAN());
+		
+		addJLabel(center, "Approved");
+		addTextField(center, payment.isApproved() ? "Approved" : "Not yet approved");
+		
+		add(center, BorderLayout.CENTER);
+		
+		JButton button = new JButton("Approve");
+		add(button, BorderLayout.SOUTH);
+		if (payment.isApproved()) {
+			button.setVisible(false);
+		}
 
-	public static void main(String[] args) {
-		final List<Payment> list = new ArrayList<>();
-		Client client = new Client(0, "Name", "Surname", 20, "name.surname@gmail.com", "0835548969", "0014HBIBAN");
-		Client client2 = new Client(1, "Anne", "Rosalinda", 24, "rosa@hotmail.com", "0735548969", "55555HB");
-		list.add(new Payment(0, client, 3000));
-		list.add(new Payment(1, client, 4000));
-		list.add(new Payment(2, client2, 5000));
-		Payment pay = new Payment(3, client2, 30393);
-		pay.approve();
-		list.add(pay);
-		SwingUtilities.invokeLater(new Runnable() {
+		final PaymentView pointer = this;
+		
+		button.addActionListener(new ActionListener() {
 			
 			@Override
-			public void run() {
-				new DisplayList<Payment>(list, "Payments").setVisible(true);;
+			public void actionPerformed(ActionEvent e) {
+				payment.approve();
+				JOptionPane.showMessageDialog(pointer, "Payment has been approved", "Payment", JOptionPane.INFORMATION_MESSAGE);
+				pointer.dispose();
 			}
 		});
 	}
 
-	private void addTextField (String content) {
-		ClientView.addTextFieldToFrame(this, content);
+
+	private void addTextField (JPanel panel, String content) {
+		Border border = BorderFactory.createLineBorder(Color.lightGray, 1);
+		JTextField text = new JTextField(content);
+		text.setHorizontalAlignment(JTextField.CENTER);
+		text.setBackground(Color.gray);
+		text.setBorder(border);
+		text.setEditable(false);
+		panel.add(text);
 	}
 	
-	private void addJLabel (String content) {
-		ClientView.addJLabelToFrame(this, content);
+	private void addJLabel (JPanel panel, String content) {
+		JLabel label = new JLabel(content);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(label);
 	}
 }

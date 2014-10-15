@@ -1,7 +1,7 @@
 package model;
 
 public class Claim {
-	
+
 	private int id;
 	private String text;
 	private Client client;
@@ -10,11 +10,12 @@ public class Claim {
 	private int amount;
 	private String place;
 	private String policeReport;
-	
+	private Car car;
+
 	private boolean ok;
 	private boolean decided;
-	
-	public Claim(int id, String date, Client client, String text, int amount) {
+
+	public Claim(int id, String date, Client client, String text, int amount, Car car) {
 		if (client != null) {
 			client.addClaim(this);
 		}
@@ -24,14 +25,32 @@ public class Claim {
 		this.text = text;
 		this.complex = false;
 		this.amount = amount;
+		this.car = car;
 		decided = false;
 	}
-	
-	public Claim(int id, String date, Client client, String text, int amount, String place, String policeReport) {
-		this(id, date, client, text, amount);
+
+	public Claim(int id, String date, Client client, String text, int amount, Car car, String place, String policeReport) {
+		this(id, date, client, text, amount, car);
 		complex = true;
 		this.place = place;
 		this.policeReport = policeReport;
+	}
+
+	public Claim(int id, String date, Client client, String text, int amount, Car car, boolean decided, boolean ok) {
+		this(id, date, client, text, amount, car);
+		this.ok = ok;
+		this.decided = decided;
+	}
+
+	public Claim(int id, String date, Client client, String text, int amount, Car car, String place,
+			String policeReport, boolean decided, boolean ok) {
+		this(id, date, client, text, amount, car, place, policeReport);
+		this.ok = ok;
+		this.decided = decided;
+	}
+
+	public boolean isDecided() {
+		return decided;
 	}
 
 	public String getDate() {
@@ -71,25 +90,35 @@ public class Claim {
 	}
 
 	public String getPlace() throws UnsupportedOperationException {
-		if (!this.complex) throw new UnsupportedOperationException();
+		if (!this.complex)
+			throw new UnsupportedOperationException();
 		return place;
 	}
 
 	public String getPoliceReport() throws UnsupportedOperationException {
-		if (!this.complex) throw new UnsupportedOperationException();
+		if (!this.complex)
+			throw new UnsupportedOperationException();
 		return policeReport;
 	}
-	
-	public boolean isOK () throws UnsupportedOperationException {
+
+	public boolean isOK() throws UnsupportedOperationException {
 		if (!decided) {
 			throw new UnsupportedOperationException();
 		}
 		return ok;
 	}
-	
-	public void setOK (boolean ok) {
+
+	public void setOK(boolean ok) {
 		decided = true;
 		this.ok = ok;
+	}
+
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
 	}
 
 	@Override
@@ -119,5 +148,5 @@ public class Claim {
 		String approved = decided ? (ok ? "Approved" : "Not approved") : "Ongoing";
 		return String.format("%4d %13s %13s %12s", id, client.getName(), client.getSurname(), approved);
 	}
-	
+
 }

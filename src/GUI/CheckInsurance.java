@@ -67,6 +67,7 @@ public class CheckInsurance extends JFrame {
 				}
 				else {
 					new EvaluateClaim(insured).setVisible(true);
+					pointer.dispose();
 				}
 			}
 		});

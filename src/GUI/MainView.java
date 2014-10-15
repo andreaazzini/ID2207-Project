@@ -60,14 +60,12 @@ public class MainView extends JFrame {
 		add(north, BorderLayout.NORTH);
 		
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(3, 1));
+		panel.setLayout(new GridLayout(2, 1));
 		JButton viewClaims = new JButton("See claims");
 		JButton registerNewClaim = new JButton("Register new claim");
-		JButton phoneGarage = new JButton("Phone the garage");
 		
 		panel.add(viewClaims);
 		panel.add(registerNewClaim);
-		panel.add(phoneGarage);
 		
 		add(panel, BorderLayout.CENTER);
 		
@@ -85,14 +83,6 @@ public class MainView extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new CheckInsurance().setVisible(true);
-			}
-		});
-		
-		phoneGarage.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// open phone the garage window
 			}
 		});
 		
