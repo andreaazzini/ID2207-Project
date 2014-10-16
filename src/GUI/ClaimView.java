@@ -52,8 +52,12 @@ public class ClaimView extends JFrame {
 
 		JPanel south = new JPanel();
 		south.setLayout(new GridLayout(3, 2));
-		south.add(new JTextField("Amount: " + String.valueOf(claim.getAmount()) + "SEK"));
-		south.add(new JTextField(claim.getDate().toString()));
+		JTextField amount = new JTextField("Amount: " + String.valueOf(claim.getAmount()) + "SEK");
+		amount.setEditable(false);
+		south.add(amount);
+		JTextField date = new JTextField(claim.getDate().toString());
+		date.setEditable(false);
+		south.add(date);
 
 		JButton ok = new JButton("OK");
 		ok.setForeground(Color.green);
