@@ -57,8 +57,8 @@ public class Form extends JFrame {
 		this.costOfDamage = costOfDamage;
 
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		setSize(400, 680);
-		setLocation(250, 250);
+		setSize(620, 500);
+		setLocation(350, 250);
 		setTitle("Claim form");
 
 		rows1 = severe ? 5 : 4;
@@ -70,6 +70,17 @@ public class Form extends JFrame {
 
 	private void initGUI() {
 		setLayout(new BorderLayout());
+		
+		JPanel wrap = new JPanel();
+		wrap.setLayout(new BorderLayout());
+		
+		JPanel left = new JPanel();
+		left.setLayout(new GridLayout(2, 1));
+		
+		JPanel innerleft1 = new JPanel();
+		JPanel innerleft2 = new JPanel();
+		innerleft1.setLayout(new GridLayout(rows1, 1));
+		innerleft2.setLayout(new GridLayout(rows2, 1));
 
 		JPanel parent1 = new JPanel();
 		parent1.setLayout(new GridLayout(rows1, 1));
@@ -99,16 +110,16 @@ public class Form extends JFrame {
 		policeReport = new JTextArea();
 
 
-		addTextField(parent1, nameField, client.getName() + " " + client.getSurname(), "Name", new JLabel(), false);
-		addTextField(parent1, carField, car.getName() + ", " + car.getPrice() + "SEK", "Car, price", new JLabel(), false);
-		addTextField(parent1, date, "", "Date", dateLabel, false);
-		addTextField(parent1, amount, costOfDamage.toString(), "Amount", amountLabel, false);
+		addTextField(parent1, innerleft1, nameField, client.getName() + " " + client.getSurname(), "Name", new JLabel(), false);
+		addTextField(parent1, innerleft1, carField, car.getName() + ", " + car.getPrice() + "SEK", "Car, price", new JLabel(), false);
+		addTextField(parent1, innerleft1, date, "", "Date", dateLabel, false);
+		addTextField(parent1, innerleft1, amount, costOfDamage.toString(), "Amount", amountLabel, false);
 		if (severe) {
-			addTextField(parent1, place, "", "Place", placeLabel, false);
+			addTextField(parent1, innerleft1, place, "", "Place", placeLabel, false);
 		}
-		addTextField(parent2, text, "", "Text", textLabel, true);
+		addTextField(parent2, innerleft2, text, "", "Text", textLabel, true);
 		if (severe) {
-			addTextField(parent2, policeReport, "", "Police report", policeReportLabel, true);
+			addTextField(parent2, innerleft2, policeReport, "", "Police report", policeReportLabel, true);
 		}
 		
 		JPanel parent = new JPanel();
@@ -116,7 +127,11 @@ public class Form extends JFrame {
 		parent.add(parent1);
 		parent.add(parent2);
 		
-		add(parent, BorderLayout.CENTER);
+		left.add(innerleft1);
+		left.add(innerleft2);
+		wrap.add(left, BorderLayout.WEST);
+		wrap.add(parent, BorderLayout.CENTER);
+		add(wrap, BorderLayout.CENTER);
 
 		JButton submit = new JButton("Submit");
 		add(submit, BorderLayout.SOUTH);
@@ -181,41 +196,38 @@ public class Form extends JFrame {
 	}
 
 	// area or field
-	private void addTextField(JPanel parent, Object field, String text, String name, JLabel control, boolean area) {
+	private void addTextField(JPanel parent, JPanel left, Object field, String text, String name, JLabel control, boolean area) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-
-		JPanel up = new JPanel();
+		
+		panel.setLayout(new GridLayout(1, 2));
 
 		JLabel label = new JLabel(name);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JPanel labelWrap = new JPanel();
 		control.setPreferredSize(new Dimension(250, 8));
 		control.setSize(250, 8);
 		control.setHorizontalAlignment(SwingConstants.CENTER);
-		labelWrap.add(control);
 
+		left.add(label);
 		if (area) {
 			JTextArea box = ((JTextArea) field);
 			box.setText(text);
 			box.setSize(250, 60);
 			box.setPreferredSize(new Dimension(250, 60));
 			JScrollPane pane = new JScrollPane(box);
-			up.add(label);
-			up.add(pane);
+			panel.add(pane);
 		} else {
+			JPanel wrap = new JPanel();
 			JTextField box = ((JTextField) field);
 			box.setText(text);
 			box.setSize(140, 20);
 			box.setPreferredSize(new Dimension(125, 20));
-			up.add(label);
-			up.add(box);
+			wrap.add(box);
+			panel.add(wrap);
 		}
-
-
-		panel.add(up, BorderLayout.CENTER);
-		panel.add(labelWrap, BorderLayout.SOUTH);
+		panel.add(control);
 		parent.add(panel);
+		
 	}
 
 
