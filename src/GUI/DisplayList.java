@@ -1,9 +1,13 @@
 package GUI;
 
+import global.session.SessionHandler;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +68,19 @@ public class DisplayList<E> extends JFrame {
 			}
 		});
 
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				super.windowClosed(e);
+				if (!list.isEmpty()) {
+					if (list.get(0) instanceof Payment) {
+						SessionHandler.logout();
+						new Authentication().setVisible(true);
+					}
+				}
+			}
+		});
+		
 		getContentPane().add(scroll, BorderLayout.CENTER);
 	}
 
