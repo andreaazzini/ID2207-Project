@@ -48,7 +48,7 @@ public class PaymentView extends JFrame {
 		addTextField(center, payment.getClient().getName() + " " + payment.getClient().getSurname());
 		
 		addJLabel(center, "Date");
-		JTextField date = new JTextField(payment.getDate().toString());
+		final JTextField date = new JTextField(payment.getDate().toString());
 		date.setBorder(BorderFactory.createLineBorder(Color.lightGray, 1));
 		date.setBackground(Color.lightGray);
 		date.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,11 +65,19 @@ public class PaymentView extends JFrame {
 		
 		add(center, BorderLayout.CENTER);
 		
+		JPanel south = new JPanel();
+		south.setLayout(new GridLayout(1, 2));
+		
 		JButton button = new JButton("Approve");
-		add(button, BorderLayout.SOUTH);
+		south.add(button);
 		if (payment.isApproved()) {
 			button.setVisible(false);
 		}
+		
+		JButton changeDate = new JButton("Change date");
+		south.add(changeDate);
+		
+		add(south, BorderLayout.SOUTH);
 
 		final PaymentView pointer = this;
 		
@@ -80,6 +88,15 @@ public class PaymentView extends JFrame {
 				payment.approve();
 				JOptionPane.showMessageDialog(pointer, "Payment has been approved", "Payment", JOptionPane.INFORMATION_MESSAGE);
 				pointer.dispose();
+			}
+		});
+		
+		changeDate.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				payment.setDate(date.getText());
+				JOptionPane.showMessageDialog(pointer, "Date of payment changed", "Date", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 	}

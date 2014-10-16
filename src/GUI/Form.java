@@ -187,9 +187,9 @@ public class Form extends JFrame {
 					StorageHandler.addNewClaim(claim);
 					Payment payment = new Payment(newPaymentId, today, client, Integer.parseInt(amount.getText()));
 					StorageHandler.addNewPayment(payment);
-					pointer.dispose();
 					JOptionPane.showMessageDialog(pointer, "Claim has been registered", "Claim registration",
 							JOptionPane.INFORMATION_MESSAGE);
+					pointer.dispose();
 				}
 			}
 		});
@@ -213,7 +213,6 @@ public class Form extends JFrame {
 			JTextArea box = ((JTextArea) field);
 			box.setText(text);
 			box.setSize(250, 60);
-			box.setPreferredSize(new Dimension(250, 60));
 			JScrollPane pane = new JScrollPane(box);
 			panel.add(pane);
 		} else {
